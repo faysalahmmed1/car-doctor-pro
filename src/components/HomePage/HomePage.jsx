@@ -1,9 +1,16 @@
 
+import About from "./About";
+import Banar from "./Banar";
+import Service from "./Service";
+
 
 const HomePage = () => {
     return (
         <div className="h-screen">
-            <h1>home page!!</h1>
+            <Banar/>
+            <About/>
+            <Service/>
+           
         </div>
     );
 };
