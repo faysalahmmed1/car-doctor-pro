@@ -1,7 +1,8 @@
 
 import About from "./About";
 import Banar from "./Banar";
-import Service from "./Service";
+import Services from "./Services";
+
 
 
 const HomePage = () => {
@@ -9,7 +10,7 @@ const HomePage = () => {
         <div className="h-screen">
             <Banar/>
             <About/>
-            <Service/>
+            <Services/>
            
         </div>
     );
