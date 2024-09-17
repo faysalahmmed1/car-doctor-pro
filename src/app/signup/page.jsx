@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FaFacebook, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import Swal from 'sweetalert2';
 
 const page = () => {
     const handleSignUp = async (event) => {
@@ -13,7 +14,25 @@ const page = () => {
             email: event.target.email.value,
             password: event.target.password.value,
         };
-        console.log(newUser);
+
+        const resp = await fetch('http://localhost:3000/signup/api', {
+            method: "POST",
+            body: JSON.stringify(newUser),
+            headers: {
+                "content-type": "application/json"
+            }
+        });
+        console.log(resp)
+        if (resp.status === 200) {
+            event.target.reset();
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User is Successfully Created!",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        }
     }
     return (
         <div className='container mx-auto bg-base-300 py-12 px-12'>
@@ -23,7 +42,7 @@ const page = () => {
                 </div>
                 <div className='border border-sky-400 p-12'>
                     <h6 className='text-center text-primary font-semibold text-3xl'>Login</h6>
-                    
+
                     <form onSubmit={handleSignUp}>
                         <label className='text-black' htmlFor="">Name</label>
                         <input type="text" name='name' placeholder="your name" className="input input-bordered w-full text-black mt-3 mb-2" />

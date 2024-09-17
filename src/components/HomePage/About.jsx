@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const About = () => {
@@ -15,7 +16,7 @@ const About = () => {
                         <h1 className='text-4xl'>We are qualified & of experience in this field</h1>
                         <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
                         <p>the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
-                        <button className='btn btn-primary mt-2'>Get More Info</button>
+                        <Link href={'/about'}><button className='btn btn-primary mt-2'>Get More Info</button></Link>
                     </div>
                 </div>
             </div>
