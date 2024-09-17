@@ -1,10 +1,11 @@
 import { services } from "@/Lib/Services";
 import ServicesCard from "../Cards/ServicesCard";
+import Link from "next/link";
 
 const Services = () => {
 
     return (
-        <div className="container mx-auto">
+        <div className="container mx-auto text-center">
             <div className="text-center">
                 <h1 className="text-red-500 font-semibold">Services</h1>
                 <h1 className="text-4xl text-black"> Our Service Area</h1>
@@ -17,6 +18,7 @@ const Services = () => {
                     ))
                 }
             </div>
+            <Link href={'/service'}><button className="btn text-center items-center btn-outline">More Services..</button></Link>
         </div>
     );
 };
