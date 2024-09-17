@@ -6,42 +6,51 @@ import { FaFacebook, FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 
 const page = () => {
-    const handleSignUp = async () => {
-        console.log('clicked')
+    const handleSignUp = async (event) => {
+        event.preventDefault();
+        const newUser = {
+            name: event.target.name.value,
+            email: event.target.email.value,
+            password: event.target.password.value,
+        };
+        console.log(newUser);
     }
     return (
         <div className='container mx-auto bg-base-300 py-12 px-12'>
-        <div className='grid  sm:grid-cols-1 lg:grid-cols-2 container mx-auto'>
-            <div>
-                <Image src={'/assets/images/login/login.svg'} width={460} height={502} alt='login' />
-            </div>
-            <div className='border-2 p-12'>
-                <h6 className='text-center text-primary font-semibold text-3xl'>Login</h6>
-                <form onSubmit={handleSignUp}>
-                    <label className='text-black' htmlFor="">Email</label>
-                    <input type="email" name='email' placeholder="your Email" className="input input-bordered w-full text-black mt-3 mb-2" />
+            <div className='grid  sm:grid-cols-1 lg:grid-cols-2 container mx-auto'>
+                <div>
+                    <Image src={'/assets/images/login/login.svg'} width={460} height={502} alt='login' />
+                </div>
+                <div className='border border-sky-400 p-12'>
+                    <h6 className='text-center text-primary font-semibold text-3xl'>Login</h6>
+                    
+                    <form onSubmit={handleSignUp}>
+                        <label className='text-black' htmlFor="">Name</label>
+                        <input type="text" name='name' placeholder="your name" className="input input-bordered w-full text-black mt-3 mb-2" />
+                        <label className='text-black' htmlFor="">Email</label>
+                        <input type="email" name='email' placeholder="your Email" className="input input-bordered w-full text-black mt-3 mb-2" />
 
-                    <label className='text-black' htmlFor="">Password</label>
-                    <input type="password" name='Password' placeholder="your password" className="input input-bordered w-full text-black mt-3 " />
+                        <label className='text-black' htmlFor="">Password</label>
+                        <input type="password" name='password' placeholder="your password" className="input input-bordered w-full text-black mt-3 " />
 
-                    <button type='submit' className="btn btn-primary w-full mt-5">Sign Up</button>
-                </form>
+                        <button type='submit' className="btn btn-primary w-full mt-5">Sign Up</button>
+                    </form>
 
-                <div className='text-black text-center mt-4'>
-                    <h1>or Sign in With</h1>
+                    <div className='text-black text-center mt-4'>
+                        <h1>or Sign in With</h1>
+                    </div>
+
+
+                    <div className='flex text-4xl gap-x-2 text-center justify-center items-center mt-3'>
+                        <FcGoogle className='text-primary' />
+                        <FaGithub className='text-black' />
+                        <FaFacebook className='text-blue-600' />
+                    </div>
+                    <h1 className='text-black text-center mt-4'>Already have an Account?<Link className='text-primary' href={'/login'}>Login</Link></h1>
                 </div>
 
-
-                <div className='flex text-4xl gap-x-2 text-center justify-center items-center mt-3'>
-                    <FcGoogle className='text-primary' />
-                    <FaGithub className='text-black' />
-                    <FaFacebook className='text-blue-600' />
-                </div>
-                <h1 className='text-black text-center mt-4'>Already have an Account?<Link className='text-primary' href={'/login'}>Login</Link></h1>
             </div>
-
         </div>
-    </div>
     );
 };
 

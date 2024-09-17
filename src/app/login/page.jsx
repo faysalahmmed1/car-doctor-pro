@@ -16,7 +16,7 @@ const page = () => {
                 <div>
                     <Image src={'/assets/images/login/login.svg'} width={460} height={502} alt='login' />
                 </div>
-                <div className='border-2 p-12'>
+                <div className='border border-sky-400 p-12'>
                     <h6 className='text-center text-primary font-semibold text-3xl'>Login</h6>
                     <form onSubmit={handleLongin}>
                         <label className='text-black' htmlFor="">Email</label>
