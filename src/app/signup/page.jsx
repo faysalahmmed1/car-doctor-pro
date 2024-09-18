@@ -1,4 +1,5 @@
 "use client"
+import SocialSignIn from '@/components/Shared/SocialSignIn/SocialSignIn';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -28,7 +29,7 @@ const page = () => {
             Swal.fire({
                 position: "top-end",
                 icon: "success",
-                title: "User is Successfully Created!",
+                title: "Sign-Up Successful",
                 showConfirmButton: false,
                 timer: 1500
               });
@@ -60,11 +61,7 @@ const page = () => {
                     </div>
 
 
-                    <div className='flex text-4xl gap-x-2 text-center justify-center items-center mt-3'>
-                        <FcGoogle className='text-primary' />
-                        <FaGithub className='text-black' />
-                        <FaFacebook className='text-blue-600' />
-                    </div>
+                    <SocialSignIn></SocialSignIn>
                     <h1 className='text-black text-center mt-4'>Already have an Account?<Link className='text-primary' href={'/login'}>Login</Link></h1>
                 </div>
 

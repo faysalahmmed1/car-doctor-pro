@@ -1,9 +1,9 @@
 
 import "./globals.css";
 import Navber from "@/components/Shared/Navber/Navber";
-import Footer from "@/components/Shared/Footer/Footer";
 import { Inter } from "next/font/google";
 import AuthProvider from "@/servicess/authProvider";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
           <Navber />
           {children}
         </AuthProvider>
+
       </body>
     </html>
   );

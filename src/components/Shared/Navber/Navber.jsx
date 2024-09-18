@@ -1,3 +1,5 @@
+"use client"
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { IoIosCart, IoMdSearch } from "react-icons/io";
@@ -5,32 +7,8 @@ import { IoIosCart, IoMdSearch } from "react-icons/io";
 
 
 const Navber = () => {
-    const itemNav = [
-        {
-            title: 'Home',
-            path: '/'
-        },
-        {
-            title: 'Service',
-            path: '/service'
-        },
-        {
-            title: 'Blog',
-            path: '/blog'
-        },
-        {
-            title: 'Contacts',
-            path: '/contacts'
-        },
-        {
-            title: 'About',
-            path: '/about'
-        },
-        {
-            title: 'Login',
-            path: '/login'
-        }
-    ];
+    const session = useSession()
+    console.log(session);
 
     return (
         <div className="bg-base-100 text-slate-900">
@@ -83,13 +61,46 @@ const Navber = () => {
                 <div className="navbar-end">
                     <div className="flex items-center space-x-3">
                         <IoIosCart className="text-2xl" />
-                        <IoMdSearch  className="text-2xl"/>
-                        <a className="btn btn-outline text-red">Appoinments</a>
+                        <IoMdSearch className="text-2xl" />
+                        <a className="btn btn-outline text-red">Appointments</a>
+                        {
+                            session?.status === 'loading' && <h6>loading...</h6>
+                        }
+                        {
+                            session?.status === 'unauthenticated' &&
+                            <Link href={'/login'} className="btn text-red" >login</Link>
+                        }
+                        {
+                            session?.status === 'authenticated' &&
+                            <button onClick={() => signOut()} className="btn text-red">Sign Out</button>
+                        }
                     </div>
                 </div>
             </div>
         </div>
     );
 };
+const itemNav = [
+    {
+        title: 'Home',
+        path: '/'
+    },
+    {
+        title: 'Service',
+        path: '/service'
+    },
+    {
+        title: 'Blog',
+        path: '/blog'
+    },
+    {
+        title: 'Contacts',
+        path: '/contacts'
+    },
+    {
+        title: 'About',
+        path: '/about'
+    }
+];
 
 export default Navber;
