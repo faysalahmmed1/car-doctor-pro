@@ -13,14 +13,35 @@ const checkout = ({ params }) => {
         setService(details.service);
     };
     const { _id, title, img, price, description } = service || {};
+    useEffect(() => {
+        loadService();
+    }, [params]);
 
     const handleBooking = async (event) => {
         event.preventDefault();
+        const newBooking = {
+            email: data?.user?.email,
+            name: data?.user?.name,
+            address: event.target.address.value,
+            phone: event.target.phone.value,
+            date: event.target.date.value,
+            serviceTitle: title,
+            serviceID: _id,
+            price: price
+        }
+        console.log(newBooking);
+
+        const resp = await fetch('http://localhost:3000/checkout/api/new-book', {
+            method: 'POST',
+            body: JSON.stringify(newBooking),
+            headers: {
+                "content-type": "application/json"
+            }
+        })
+        console.log(resp)
     };
 
-    useEffect(() => {
-        loadService();
-    }, [params])
+
 
 
     return (
@@ -45,7 +66,7 @@ const checkout = ({ params }) => {
                 <form onSubmit={handleBooking}>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5 '>
                         <div>
-                            <input defaultValue={data?.user?.name}  type="text" name='name' placeholder="Your Name" className="input input-bordered w-full" />
+                            <input defaultValue={data?.user?.name} type="text" name='name' placeholder="Your Name" className="input input-bordered w-full" />
                         </div>
                         <div>
                             <input defaultValue={new Date().toISOString().split("T")[0]} type="date" name="date" placeholder="Select Date" className="input input-bordered w-full" />
@@ -55,10 +76,11 @@ const checkout = ({ params }) => {
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
                         <div>
-                            <input defaultValue={data?.user?.email}  type="email" name='email' placeholder="Your Email" className="input input-bordered w-full" />
+                            <input defaultValue={data?.user?.email} type="email" name='email' placeholder="Your Email" className="input input-bordered w-full" />
                         </div>
                         <div>
                             <input defaultValue={price}
+                                readOnly
                                 type="number" name="amount" placeholder="Due Amount" className="input input-bordered w-full" min="0"
                                 step="0.01"
                             />
@@ -76,12 +98,6 @@ const checkout = ({ params }) => {
                             />
                         </div>
 
-                    </div>
-
-                    <div className='mb-6'>
-                        <textarea
-                            placeholder="Your Message"
-                            className="textarea textarea-bordered w-full h-24"></textarea>
                     </div>
 
                     <div className='text-center'>

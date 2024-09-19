@@ -8,7 +8,7 @@ import { IoIosCart, IoMdSearch } from "react-icons/io";
 
 const Navber = () => {
     const session = useSession()
-    console.log(session);
+    
 
     return (
         <div className="bg-base-100 text-slate-900">
