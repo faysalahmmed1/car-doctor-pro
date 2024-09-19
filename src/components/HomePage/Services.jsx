@@ -1,14 +1,7 @@
 // import { services } from "@/Lib/Services";
+import { getServices } from "@/servicess/getServices";
 import ServicesCard from "../Cards/ServicesCard";
 import Link from "next/link";
-
-
-
-const getServices = async () => {
-    const res = await fetch('http://localhost:3000/services/api/get-all');
-    const services = res.json();
-    return services;
-}
 
 const Services = async () => {
     const { services } = await getServices();
@@ -23,7 +16,7 @@ const Services = async () => {
             </div>
             <div className="container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-5 m-10 ">
                 {
-                    services?.length > 0 && services.map((service) => (
+                    services?.length > 0 && services.slice(0, 3).map((service) => (
                         <ServicesCard key={service._id} service={service} />
                     ))
                 }
