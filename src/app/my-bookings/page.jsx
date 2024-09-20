@@ -3,7 +3,9 @@
 
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 
 
 const page = () => {
@@ -18,22 +20,28 @@ const page = () => {
 
     const handleDelete = async (id) => {
         try {
-          const response = await fetch(`http://localhost:3000/my-bookings/api/delete-booking/${id}`, {
-            method: 'DELETE',
-          });
-      
-          const data = await response.json();
-      
-          if (data?.response?.deletedCount > 0) {
-            loadData(); 
-          } else {
-            console.error('Failed to delete the booking');
-          }
+            const response = await fetch(`http://localhost:3000/my-bookings/api/booking/${id}`, {
+                method: 'DELETE',
+            });
+
+            const data = await response.json();
+
+            if (data?.response?.deletedCount > 0) {
+                loadData();
+            } else {
+                console.error('Failed to delete the booking');
+            }
         } catch (error) {
-          console.error('Error deleting booking:', error);
+            console.error('Error deleting booking:', error);
         }
-      };
-      
+        Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Deleteing Successfully!",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    };
 
     useEffect(() => {
         loadData()
@@ -81,9 +89,14 @@ const page = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{date}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex space-x-3">
-                                            <button className="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
-                                                Edit
-                                            </button>
+
+                                            <Link href={`my-bookings/update/${_id}`}>
+                                                <button className="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
+                                                    Edit
+                                                </button>
+
+                                            </Link>
+
                                             <button onClick={() => handleDelete(_id)} className="btn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
                                                 Delete
                                             </button>
