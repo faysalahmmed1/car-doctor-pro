@@ -90,6 +90,10 @@ const itemNav = [
         path: '/service'
     },
     {
+        title: 'MyBookings',
+        path: '/my-bookings'
+    },
+    {
         title: 'Blog',
         path: '/blog'
     },

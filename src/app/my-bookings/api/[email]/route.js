@@ -4,8 +4,8 @@ export const GET = async (request, { params }) => {
     const db = await connectDB();
     const bookingCollection = db.collection('bookings');
     try {
-        const myBookings = await bookingCollection.find({ email: params.email }).toArray();
-        return new Response(JSON.stringify({ myBookings }), {
+        const Bookings = await bookingCollection.find({ email: params.email }).toArray();
+        return new Response(JSON.stringify({Bookings }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' }
         });
