@@ -1,22 +1,22 @@
-
-"use client"
+"use client";
 
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Swal from 'sweetalert2';
 
-
-const page = () => {
-    const session = useSession()
+const MyBookings = () => {
+    const { data: session } = useSession();
     const [bookings, setBookings] = useState([]);
 
-    const loadData = async () => {
-        const resp = await fetch(`http://localhost:3000/my-bookings/api/f@gmail.com`);
-        const data = await resp.json()
-        setBookings(data?.Bookings);
-    };
+    const loadData = useCallback(async () => {
+        if (session?.user?.email) {
+            const resp = await fetch(`http://localhost:3000/my-bookings/api/${session.user.email}`);
+            const data = await resp.json();
+            setBookings(data?.Bookings);
+        }
+    }, [session]);
 
     const handleDelete = async (id) => {
         try {
@@ -37,19 +37,19 @@ const page = () => {
         Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Deleteing Successfully!",
+            title: "Deleting Successfully!",
             showConfirmButton: false,
             timer: 1500
         });
     };
 
     useEffect(() => {
-        loadData()
-    }, [session])
+        loadData();
+    }, [loadData]);
 
     return (
         <div className='container mx-auto text-center bg-white text-black'>
-            <div className='relative w-full h-72 text-center items-center ml-16 '>
+            <div className='relative w-full h-72 text-center items-center ml-16'>
                 <Image
                     className='absolute h-72 w-full rounded-2xl items-center bg-base-100 object-cover'
                     src={'/assets/images/about_us/parts.jpg'}
@@ -57,8 +57,6 @@ const page = () => {
                     width={2000} height={1200}
                     style={{ width: "90vw" }}
                 />
-
-
             </div>
             <h1 className='text-primary font-semibold text-4xl mt-5'>MY BOOKINGS</h1>
 
@@ -89,14 +87,11 @@ const page = () => {
                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{date}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="flex space-x-3">
-
                                             <Link href={`my-bookings/update/${_id}`}>
                                                 <button className="btn bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
                                                     Edit
                                                 </button>
-
                                             </Link>
-
                                             <button onClick={() => handleDelete(_id)} className="btn bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded">
                                                 Delete
                                             </button>
@@ -108,9 +103,8 @@ const page = () => {
                     </table>
                 </div>
             </div>
-
         </div>
     );
 };
 
-export default page;
+export default MyBookings;

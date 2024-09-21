@@ -1,22 +1,23 @@
-"use client"
+"use client";
 import { getServicesDetails } from '@/servicess/getServices';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 
-const checkout = ({ params }) => {
+const Checkout = ({ params }) => {
     const { data } = useSession();
     const [service, setService] = useState({});
 
-    const loadService = async () => {
-        const details = await getServicesDetails(params.id);
-        setService(details.service);
-    };
     const { _id, title, img, price, description } = service || {};
+
     useEffect(() => {
+        const loadService = async () => {
+            const details = await getServicesDetails(params.id);
+            setService(details.service);
+        };
         loadService();
-    }, [params]);
+    }, [params.id]);
 
     const handleBooking = async (event) => {
         event.preventDefault();
@@ -29,7 +30,7 @@ const checkout = ({ params }) => {
             serviceTitle: title,
             serviceID: _id,
             price: price
-        }
+        };
         console.log(newBooking);
 
         const resp = await fetch('http://localhost:3000/checkout/api/new-book', {
@@ -38,7 +39,7 @@ const checkout = ({ params }) => {
             headers: {
                 "content-type": "application/json"
             }
-        })
+        });
         event.target.reset();
         let timerInterval;
         Swal.fire({
@@ -57,16 +58,11 @@ const checkout = ({ params }) => {
                 clearInterval(timerInterval);
             }
         }).then((result) => {
-            /* Read more about handling dismissals below */
             if (result.dismiss === Swal.DismissReason.timer) {
                 console.log("I was closed by the timer");
             }
         });
-
     };
-
-
-
 
     return (
         <div className='container mx-auto bg-base-100'>
@@ -78,13 +74,11 @@ const checkout = ({ params }) => {
                     width={2000} height={1200}
                     style={{ width: "90vw" }}
                 />
-
             </div>
 
             <div className='text-center'>
                 <h1 className='text-primary text-6xl mt-2'>Check Out</h1>
             </div>
-
 
             <div className='bg-slate-300 my-12 p-12 mx-auto max-w-4xl text-black'>
                 <form onSubmit={handleBooking}>
@@ -95,7 +89,6 @@ const checkout = ({ params }) => {
                         <div>
                             <input defaultValue={new Date().toISOString().split("T")[0]} type="date" name="date" placeholder="Select Date" className="input input-bordered w-full" />
                         </div>
-
                     </div>
 
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
@@ -109,7 +102,6 @@ const checkout = ({ params }) => {
                                 step="0.01"
                             />
                         </div>
-
                     </div>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
                         <div>
@@ -117,11 +109,9 @@ const checkout = ({ params }) => {
                         </div>
                         <div>
                             <input
-                                type="text" name="address" placeholder="present Address" className="input input-bordered w-full" min="0"
-                                step="0.01"
+                                type="text" name="address" placeholder="Present Address" className="input input-bordered w-full"
                             />
                         </div>
-
                     </div>
 
                     <div className='text-center'>
@@ -129,12 +119,8 @@ const checkout = ({ params }) => {
                     </div>
                 </form>
             </div>
-
-
-
-
         </div>
     );
 };
 
-export default checkout;
+export default Checkout;

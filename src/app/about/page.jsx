@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 const page = () => {
@@ -39,28 +40,26 @@ const page = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                             {/* Team Member 1 */}
                             <div className="text-center">
-                                <img src="/assets/images/team/1.jpg" alt="John Doe" className="rounded-full mx-auto w-32 h-32 mb-4" />
+                                <Image width={100} height={48} src="/assets/images/team/1.jpg" alt="John Doe" className="rounded-full mx-auto w-32 h-32 mb-4" />
                                 <h3 className="text-xl font-medium text-gray-800">John Doe</h3>
                                 <p className="text-gray-600">Lead Mechanic</p>
                             </div>
 
                             {/* Team Member 2 */}
                             <div className="text-center">
-                                <img src="/assets/images/team/2.jpg" alt="Jane Smith" className="rounded-full mx-auto w-32 h-32 mb-4" />
+                                <Image width={100} height={48} src="/assets/images/team/2.jpg" alt="Jane Smith" className="rounded-full mx-auto w-32 h-32 mb-4" />
                                 <h3 className="text-xl font-medium text-gray-800">Jane Smith</h3>
                                 <p className="text-gray-600">Diagnostic Specialist</p>
                             </div>
 
                             {/* Team Member 3 */}
                             <div className="text-center">
-                                <img src="/assets/images/team/3.jpg" alt="Mike Johnson" className="rounded-full mx-auto w-32 h-32 mb-4" />
+                                <Image width={100} height={48} src="/assets/images/team/3.jpg" alt="Mike Johnson" className="rounded-full mx-auto w-32 h-32 mb-4" />
                                 <h3 className="text-xl font-medium text-gray-800">Mike Johnson</h3>
                                 <p className="text-gray-600">Customer Relations</p>
                             </div>
                         </div>
 
-                        
-                       
                     </div>
 
 
@@ -75,7 +74,8 @@ const page = () => {
                                 </h2>
                                 <div className="flex flex-col items-center text-center">
                                    
-                                    <img
+                                    <Image
+                                    width={100} height={48}
                                         src="/assets/images/developer/faysal.png"
                                         alt="Developer Name"
                                         className="rounded-full w-32 h-32 mb-4 shadow-md"

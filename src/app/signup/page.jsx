@@ -3,8 +3,8 @@ import SocialSignIn from '@/components/Shared/SocialSignIn/SocialSignIn';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FaFacebook, FaGithub } from 'react-icons/fa';
-import { FcGoogle } from 'react-icons/fc';
+
+
 import Swal from 'sweetalert2';
 
 const page = () => {

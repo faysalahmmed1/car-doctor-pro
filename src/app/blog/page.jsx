@@ -1,3 +1,4 @@
+import Image from "next/image";
 
 
 
@@ -62,7 +63,7 @@ const page = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {blogsData.map((blog) => (
                             <div key={blog.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                                <img src={blog.img} alt={blog.title} className="h-48 w-full object-cover" />
+                                <Image width={100} height={48} src={blog.img} alt={blog.title} className="h-48 w-full object-cover" />
                                 <div className="p-6">
                                     <h2 className="text-2xl font-semibold text-gray-800 mb-2">{blog.title}</h2>
                                     <p className="text-gray-600 mb-4">{blog.description}</p>
