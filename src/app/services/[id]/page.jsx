@@ -1,4 +1,4 @@
-import { getServicesDetails } from '@/servicess/getServices';
+import { getServicesDetails } from '@/services/getServices';
 import Image from 'next/image';
 import Link from 'next/link';
 

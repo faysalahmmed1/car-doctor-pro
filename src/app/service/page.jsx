@@ -1,6 +1,6 @@
 import ServicesCard from '@/components/Cards/ServicesCard';
 import React from 'react';
-import { getServices } from "@/servicess/getServices";
+import { getServices } from "@/services/getServices";
 
 const page = async () => {
     const { services } = await getServices();

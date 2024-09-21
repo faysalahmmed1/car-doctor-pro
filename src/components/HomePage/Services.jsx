@@ -1,5 +1,5 @@
 // import { services } from "@/Lib/Services";
-import { getServices } from "@/servicess/getServices";
+import { getServices } from "@/services/getServices";
 import ServicesCard from "../Cards/ServicesCard";
 import Link from "next/link";
 
