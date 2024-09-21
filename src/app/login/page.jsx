@@ -4,7 +4,7 @@ import React from 'react';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import SocialSignIn from '@/components/Shared/SocialSignIn/SocialSignIn';
 
 
@@ -12,6 +12,8 @@ import SocialSignIn from '@/components/Shared/SocialSignIn/SocialSignIn';
 const page = () => {
 
     const router = useRouter();
+    const searchparams = useSearchParams();
+    const path = searchparams.get('redirect');
 
     const handleLongin = async (event) => {
         event.preventDefault();
@@ -20,7 +22,8 @@ const page = () => {
         const resp = await signIn("credentials", {
             email,
             password,
-            redirect: false,
+            redirect: true,
+            callbackUrl: path ? path : '/'
 
         });
         event.target.reset();
