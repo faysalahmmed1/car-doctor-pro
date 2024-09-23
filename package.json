@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^5.7.2",
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "bcryptjs-react": "^2.4.6",
