@@ -1,5 +1,5 @@
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000/';
 
 export const getServices = async () => {
     const res = await fetch(`${baseUrl}/services/api/get-all`);
